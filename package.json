@@ -1,0 +1,15 @@
+{
+  "name": "nordic-giant-digital",
+  "version": "1.0.0",
+  "description": "Nordic Giant Digital, LLC — static site",
+  "scripts": {
+    "build": "bash scripts/build-site.sh"
+  },
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=24"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.2.8"
+  }
+}
