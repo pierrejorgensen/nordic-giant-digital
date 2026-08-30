@@ -298,6 +298,17 @@ header {
   padding-bottom: 0;
 }
 
+.service-list ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.service-list ul li {
+  margin: 0;
+  padding: 0;
+  background: none;
+}
+
 #contact {
   scroll-margin-top: 2rem;
 }
