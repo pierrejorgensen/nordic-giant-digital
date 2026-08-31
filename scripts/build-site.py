@@ -61,8 +61,8 @@ def render_includes(text: str) -> str:
 
 def render_page(source: Path, env: dict[str, str]) -> str:
     text = strip_front_matter(source.read_text(encoding="utf-8"))
-    text = render_env_vars(text, env)
-    return render_includes(text)
+    text = render_includes(text)
+    return render_env_vars(text, env)
 
 
 def build() -> None:
