@@ -16,6 +16,7 @@
 
 :root {
   --color-text: #0b1a23;
+  --color-text-reversed: #fff;
   --color-accent: #000;
   --color-brand-primary: #314559;
   --color-brand-secondary: #4a6e90;
@@ -57,10 +58,10 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   font-size: 4rem;
-  font-weight: 700;
-  letter-spacing: -.075rem;
+  font-weight: 900;
+  letter-spacing: -.05rem;
 }
 @media screen and (max-width: 630px) {
   h1 {
@@ -132,11 +133,11 @@ header {
 .header-contact a,
 .header-contact a:visited,
 .header-contact a:link {
-  color: #fff;
+  color: var(--color-text-reversed);
 }
 
 .header-contact a:hover {
-  color: var(--color-brand-subtle);
+  color: #e5e0d8;
   text-decoration: underline;
 }
 
@@ -185,6 +186,7 @@ main > * {
 
 .two-fer span:first-child {
   margin-bottom: 1rem;
+  color: var(--color-brand-primary);
 }
 
 .problems-list {
