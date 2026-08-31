@@ -1,13 +1,11 @@
 /* Inlined for first paint (header, layout, typography). Full rules in styley.css. */
 
 :root {
-  --color-text: #0f172a;
-  --color-accent: #1e4d7b;
-  --color-accent-hover: #163a5c;
-  --color-muted: #64748b;
-  --color-background: #fff;
-  --color-surface: #f8fafc;
-  --color-surface-muted: #f1f5f9;
+  --color-text: #0b1a23;
+  --color-slate: #1e4d7b;
+  --color-blue: #163a5c;
+  --color-accent: #000;
+  --color-muted: #e5e0d8;
   --color-border: #475569;
   --color-border-light: #e2e8f0;
   --color-shadow: rgba(15, 23, 42, 0.08);
@@ -35,12 +33,11 @@ body {
 
 a:link, a:visited {
   text-decoration: none;
-  color: var(--color-accent);
 }
 
 a:hover {
   text-decoration: underline;
-  color: var(--color-accent-hover);
+  color: var(--color-accent);
 }
 
 h1, h2, h3, h4 {
@@ -212,7 +209,7 @@ footer a:visited {
 }
 
 footer a:hover {
-  color: var(--color-accent-hover);
+  color: var(--color-accent);
 }
 
 main {
@@ -251,7 +248,6 @@ main > * {
   padding: .6rem .75rem;
   font: inherit;
   border: 1px solid var(--color-border-light);
-  background: var(--color-background);
 }
 
 .contact-form textarea {
@@ -265,12 +261,11 @@ main > * {
   padding: .65rem 1.25rem;
   border: 0;
   background: var(--color-accent);
-  color: var(--color-background);
   cursor: pointer;
 }
 
 .contact-form button:hover {
-  background: var(--color-accent-hover);
+  background: var(--color-accent);
 }
 
 .form-status {
@@ -280,7 +275,6 @@ main > * {
 }
 
 .form-status.success {
-  background: var(--color-surface-muted);
   border-left: 3px solid var(--color-accent);
 }
 
