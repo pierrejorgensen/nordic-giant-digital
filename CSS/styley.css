@@ -239,7 +239,7 @@ main > * {
   font-weight: 500;
 }
 
-.contact-form input,
+.contact-form input:not([hidden]),
 .contact-form textarea {
   display: block;
   width: 100%;
