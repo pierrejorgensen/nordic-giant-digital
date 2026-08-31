@@ -54,7 +54,7 @@ Then open http://localhost:8080
 ```
 index.html          Home page (includes contact form)
 _includes/          Header, footer, head, contact-form partials
-CSS/                Styles (critical CSS inlined at build time)
+CSS/styley.css      Site styles (includes @font-face)
 Assets/             Fonts, contact-form.js
 scripts/build-site.py   Assembles _site from sources
 ```

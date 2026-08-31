@@ -11,7 +11,6 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / "_site"
 INCLUDES = ROOT / "_includes"
-CRITICAL_STYLE_INCLUDE = "critical-style.html"
 INCLUDE_PATTERN = re.compile(r"\{%\s*include\s+([^%]+?)\s*%\}")
 ENV_PATTERN = re.compile(r"\{%\s*env\s+([A-Z0-9_]+)(?:\s+([^%]*?))?\s*%\}")
 FRONT_MATTER_PATTERN = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n", re.DOTALL)
@@ -33,16 +32,6 @@ def load_env() -> dict[str, str]:
     return env
 
 
-def load_critical_style_block() -> str:
-    fonts = (ROOT / "CSS" / "fonts.css").read_text(encoding="utf-8")
-    critical = (ROOT / "CSS" / "critical.css").read_text(encoding="utf-8")
-    return (
-        '<link rel="preload" href="/Assets/fonts/inter-latin-wght-normal.woff2" '
-        'as="font" type="font/woff2" crossorigin>\n'
-        f"<style>\n{fonts}\n{critical}\n</style>\n"
-    )
-
-
 def strip_front_matter(text: str) -> str:
     return FRONT_MATTER_PATTERN.sub("", text, count=1)
 
@@ -58,10 +47,7 @@ def render_env_vars(text: str, env: dict[str, str]) -> str:
 
 def render_includes(text: str) -> str:
     def replace(match: re.Match[str]) -> str:
-        include_name = match.group(1).strip()
-        if include_name == CRITICAL_STYLE_INCLUDE:
-            return load_critical_style_block()
-        include_path = INCLUDES / include_name
+        include_path = INCLUDES / match.group(1).strip()
         if not include_path.is_file():
             raise FileNotFoundError(f"Missing include: {include_path}")
         return include_path.read_text(encoding="utf-8")
