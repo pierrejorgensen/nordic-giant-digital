@@ -127,6 +127,7 @@ header {
 
 .header-contact {
   flex-shrink: 0;
+  align-self: center;
 }
 
 .header-contact a,
