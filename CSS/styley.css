@@ -120,14 +120,18 @@ header {
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: center;
   gap: 2rem;
   background-color: var(--color-brand-primary);
 }
 
 .header-contact {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
   flex-shrink: 0;
-  align-self: center;
+  margin: 0;
+  padding: 0;
 }
 
 .header-contact a,
