@@ -17,7 +17,10 @@
 :root {
   --color-text: #0b1a23;
   --color-accent: #000;
-  --color-border-light: #e2e8f0;
+  --color-brand-primary: #314559;
+  --color-brand-secondary: #4a6e90;
+  --color-brand-subtle: #e5e0d8;
+  --color-neutral: #606161;
 
   --width-site-max: 72rem;
   --width-prose: 56rem;
@@ -113,23 +116,32 @@ p {
 }
 
 header {
-  max-width: var(--width-site-max);
-  margin: 6rem auto 0 auto;
+  margin: 0 auto 0 auto;
   padding: 0 2rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 2rem;
+  background-color: var(--color-brand-primary);
 }
 
 .header-contact {
   flex-shrink: 0;
-  border-top: 3px solid var(--color-accent);
-  padding: .25rem 0 .35rem 0;
 }
 
-.header-contact a {
-  color: var(--color-text);
+.header-contact a,
+.header-contact a:visited,
+.header-contact a:link {
+  color: #fff;
+}
+
+.header-contact a:hover {
+  color: var(--color-brand-subtle);
+  text-decoration: underline;
+}
+
+header img {
+  height: 2rem;
 }
 
 footer {
@@ -231,7 +243,7 @@ main > * {
   margin: 0 0 1.25rem 0;
   padding: .6rem .75rem;
   font: inherit;
-  border: 1px solid var(--color-border-light);
+  border: 1px solid var(--color-brand-subtle);
 }
 
 .contact-form textarea {
