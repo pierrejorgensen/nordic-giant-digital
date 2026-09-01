@@ -61,6 +61,12 @@
 
   function lockHeight() {
     slot.style.minHeight = slot.offsetHeight + "px";
+    panel.style.top = headline.offsetTop + "px";
+    panel.style.left = headline.offsetLeft + "px";
+    panel.style.width = headline.offsetWidth + "px";
+    panel.style.height = headline.offsetHeight + "px";
+    panel.style.right = "auto";
+    panel.style.bottom = "auto";
   }
 
   function skipAhead() {
@@ -101,7 +107,6 @@
     panel.setAttribute("aria-live", "polite");
 
     await wait(crossfade);
-    lockHeight();
 
     index = 0;
 
