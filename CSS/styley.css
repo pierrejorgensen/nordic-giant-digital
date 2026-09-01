@@ -225,44 +225,35 @@ main > * {
 }
 
 .service-expand {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: .25rem;
+  display: block;
 }
 
 .service-tech-clip {
-  flex: 1 1 auto;
-  min-width: 0;
-  max-height: 1.5em;
   overflow: hidden;
+  max-height: 1.5em;
   transition: max-height .35s ease;
 }
 
 .service-tech {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
   margin: 0;
   padding: 0;
   line-height: 150%;
+  min-width: 0;
 }
 
-.service-toggle:not(:checked) ~ .service-tech-clip .service-tech {
-  white-space: nowrap;
+.service-tech-text {
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.service-toggle:checked ~ .service-tech-clip {
-  flex: 1 1 100%;
-  max-height: 12em;
-}
-
-.service-toggle:checked ~ .service-tech-clip .service-tech {
-  white-space: normal;
-}
-
-.service-more,
-.service-less {
+.service-more {
   flex: 0 0 auto;
+  margin-left: .25rem;
   color: var(--color-text);
   text-decoration: underline;
   cursor: pointer;
@@ -271,11 +262,26 @@ main > * {
 
 .service-less {
   display: none;
-  flex: 1 1 100%;
   margin-top: .25rem;
+  color: var(--color-text);
+  text-decoration: underline;
+  cursor: pointer;
 }
 
-.service-toggle:checked ~ .service-more {
+.service-toggle:checked ~ .service-tech-clip {
+  max-height: 12em;
+}
+
+.service-toggle:checked ~ .service-tech-clip .service-tech {
+  flex-wrap: wrap;
+}
+
+.service-toggle:checked ~ .service-tech-clip .service-tech-text {
+  white-space: normal;
+  overflow: visible;
+}
+
+.service-toggle:checked ~ .service-tech-clip .service-more {
   display: none;
 }
 
