@@ -273,11 +273,13 @@ main > * {
 
 .hero {
   margin-bottom: 2rem;
+  overflow: visible;
 }
 
 .hero-slot {
   position: relative;
   padding-bottom: 1rem;
+  overflow: visible;
 }
 
 .hero-slot__headline {
@@ -287,11 +289,11 @@ main > * {
 
 .hero-quotes {
   position: absolute;
-  display: grid;
-  place-items: center;
-  align-content: center;
-  margin: 0;
-  padding: 0;
+  top: 0;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  transform: translateX(-50%);
   box-sizing: border-box;
   background-color: var(--color-brand-secondary);
   color: var(--color-text-reversed);
@@ -308,17 +310,25 @@ main > * {
     visibility 0s linear 700ms;
 }
 
+.hero-quotes__inner {
+  position: relative;
+  width: min(var(--width-prose), 100%);
+  height: 100%;
+  margin: 0 auto;
+}
+
 .hero-quotes:focus-visible {
   outline: 1px solid var(--color-text-reversed);
   outline-offset: 4px;
 }
 
 .hero-quote {
-  grid-area: 1 / 1;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   margin: 0;
-  padding: 0 0.5rem;
-  max-width: 100%;
-  text-align: center;
   opacity: 0;
   transition: opacity 700ms cubic-bezier(0.9, 1, 0.9, 1);
 }
