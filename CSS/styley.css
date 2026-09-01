@@ -61,7 +61,7 @@ h1 {
   margin-bottom: 2rem;
   font-size: 4rem;
   font-weight: 900;
-  letter-spacing: -.05rem;
+  letter-spacing: -.04em;
 }
 @media screen and (max-width: 630px) {
   h1 {
@@ -168,7 +168,7 @@ main {
   grid-template-columns: minmax(0, 1fr) min(var(--width-prose), 100%) minmax(0, 1fr);
   width: 100%;
   margin: 0;
-  padding: 4rem 2rem 2rem 2rem;
+  padding: 9rem 2rem 2rem 2rem;
   box-sizing: border-box;
 }
 
