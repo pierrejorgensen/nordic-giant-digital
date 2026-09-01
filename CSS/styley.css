@@ -39,7 +39,7 @@ body {
 
 @media screen and (max-width: 460px) {
   body {
-    font-size: 16px;
+    font-size: 15px;
   }
 }
 
@@ -206,17 +206,87 @@ main > * {
   list-style: none;
 }
 
-.service-list > li {
+.service-item {
+  margin: 0 0 2.5rem 0;
+  padding: 0;
+}
+
+.service-eyebrow {
+  margin: 0 0 .35rem 0;
+  padding: 0;
+  color: var(--color-brand-secondary);
+  font-size: .85rem;
+  font-weight: 400;
+}
+
+.service-item h3 {
   margin: 0 0 1rem 0;
-  padding: 1.5rem 2rem;
+  font-weight: 700;
 }
 
-.service-list h3 {
-  margin-top: 0;
+.service-expand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: .25rem;
 }
 
-.service-list p {
-  padding-bottom: 0;
+.service-tech-clip {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-height: 1.5em;
+  overflow: hidden;
+  transition: max-height .35s ease;
+}
+
+.service-tech {
+  margin: 0;
+  padding: 0;
+  line-height: 150%;
+}
+
+.service-toggle:not(:checked) ~ .service-tech-clip .service-tech {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.service-toggle:checked ~ .service-tech-clip {
+  flex: 1 1 100%;
+  max-height: 12em;
+}
+
+.service-toggle:checked ~ .service-tech-clip .service-tech {
+  white-space: normal;
+}
+
+.service-more,
+.service-less {
+  flex: 0 0 auto;
+  color: var(--color-text);
+  text-decoration: underline;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.service-less {
+  display: none;
+  flex: 1 1 100%;
+  margin-top: .25rem;
+}
+
+.service-toggle:checked ~ .service-more {
+  display: none;
+}
+
+.service-toggle:checked ~ .service-less {
+  display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-tech-clip {
+    transition: none;
+  }
 }
 
 .prose {
