@@ -141,8 +141,103 @@ header {
   text-decoration: underline;
 }
 
-header img {
+header img,
+.site-logo svg {
   height: 2rem;
+  width: auto;
+}
+
+.site-logo {
+  --logo-motion-duration: 2500ms;
+  --logo-ease: cubic-bezier(0.9, 1, 0.9, 1);
+  flex-shrink: 0;
+  color: var(--color-text-reversed);
+}
+
+.site-logo svg {
+  display: block;
+  overflow: visible;
+}
+
+.site-logo .logo-path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  transform: scaleY(0);
+  opacity: 0;
+  animation: logo-rise var(--logo-motion-duration) var(--logo-ease) forwards;
+}
+
+.site-logo .mountain {
+  transform-box: fill-box;
+}
+
+.site-logo .mountain-left {
+  transform: translateX(12.3px);
+  animation: logo-separate-left var(--logo-motion-duration) var(--logo-ease) forwards;
+}
+
+.site-logo .mountain-right {
+  transform: translateX(-12.3px);
+  animation: logo-separate-right var(--logo-motion-duration) var(--logo-ease) forwards;
+}
+
+@keyframes logo-rise {
+  0% {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  58%,
+  100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes logo-separate-left {
+  0%,
+  58% {
+    transform: translateX(12.3px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes logo-separate-right {
+  0%,
+  58% {
+    transform: translateX(-12.3px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-logo .mountain-left,
+  .site-logo .mountain-right {
+    transform: translateX(0);
+    animation: none;
+  }
+
+  .site-logo .logo-path {
+    opacity: 1;
+    transform: scaleY(1);
+    animation: none;
+  }
 }
 
 footer {
