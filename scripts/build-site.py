@@ -45,12 +45,31 @@ def render_env_vars(text: str, env: dict[str, str]) -> str:
     return ENV_PATTERN.sub(replace, text)
 
 
+def parse_include_spec(spec: str) -> tuple[str, dict[str, str]]:
+    parts = spec.strip().split()
+    name = parts[0]
+    args: dict[str, str] = {}
+    for part in parts[1:]:
+        if "=" in part:
+            key, value = part.split("=", 1)
+            args[key.strip()] = value.strip()
+    return name, args
+
+
+def render_include_file(name: str, args: dict[str, str]) -> str:
+    include_path = INCLUDES / name
+    if not include_path.is_file():
+        raise FileNotFoundError(f"Missing include: {include_path}")
+    content = include_path.read_text(encoding="utf-8")
+    for key, value in args.items():
+        content = content.replace("{{" + key + "}}", value)
+    return render_includes(content)
+
+
 def render_includes(text: str) -> str:
     def replace(match: re.Match[str]) -> str:
-        include_path = INCLUDES / match.group(1).strip()
-        if not include_path.is_file():
-            raise FileNotFoundError(f"Missing include: {include_path}")
-        return include_path.read_text(encoding="utf-8")
+        name, args = parse_include_spec(match.group(1))
+        return render_include_file(name, args)
 
     previous = None
     while previous != text:
