@@ -31,10 +31,8 @@
   --color-brand-subtle: #e5e0d8;
   --color-neutral: #606161;
 
-  --width-site-max: 72rem;
-  --width-prose: 56rem;
-  --width-gutter: 3rem;
-  --main-grid-columns: minmax(0, var(--width-gutter)) minmax(0, min(var(--width-prose), 100%)) minmax(0, var(--width-gutter));
+  --width-content: 44rem;
+  --padding-inline: 2rem;
 }
 
 html {
@@ -251,9 +249,10 @@ header img,
 }
 
 footer {
-  max-width: var(--width-site-max);
+  max-width: var(--width-content);
   margin: 4rem auto 2rem auto;
-  padding: 0 2rem;
+  padding: 0 var(--padding-inline);
+  box-sizing: border-box;
   text-align: center;
 }
 
@@ -269,57 +268,51 @@ footer a:visited {
 }
 
 main {
-  display: grid;
-  grid-template-columns: var(--main-grid-columns);
   width: 100%;
   margin: 0;
-  padding: 9rem 2rem 2rem 2rem;
+  padding: 9rem var(--padding-inline) 2rem;
   box-sizing: border-box;
 }
 
-main > * {
-  grid-column: 2;
+.content {
+  width: 100%;
+  max-width: var(--width-content);
+  margin-inline: auto;
+  box-sizing: border-box;
 }
 
-/* Backgrounds may span inner prose plus outer gutters (max 3rem each side). */
-.bleed-outer {
-  grid-column: 1 / -1;
+@media (min-width: 48rem) {
+  main {
+    padding-inline: 0;
+  }
+
+  .content {
+    padding-inline: var(--padding-inline);
+  }
 }
 
-main > .hero {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: var(--main-grid-columns);
-  margin-bottom: 2rem;
-  overflow: visible;
+.group {
+  width: 100%;
 }
 
-.hero > h1 {
-  grid-column: 2;
+.group + .group {
+  margin-top: 2rem;
 }
 
 .hero-slot {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: var(--main-grid-columns);
   position: relative;
+  width: 100%;
   padding-bottom: 1rem;
-  overflow: visible;
 }
 
 .hero-slot h2 {
-  grid-column: 2;
   padding-bottom: 0;
   transition: opacity 700ms cubic-bezier(0.9, 1, 0.9, 1);
 }
 
 .hero-quotes {
-  grid-column: 1 / -1;
   position: absolute;
-  top: 0;
-  left: 0;
-  display: grid;
-  grid-template-columns: var(--main-grid-columns);
+  inset: 0;
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -338,12 +331,9 @@ main > .hero {
     visibility 0s linear 700ms;
 }
 
-.hero-quotes__inner {
-  grid-column: 2;
+.hero-quotes .content {
   position: relative;
-  width: 100%;
   height: 100%;
-  margin: 0;
 }
 
 .hero-quotes:focus-visible {
