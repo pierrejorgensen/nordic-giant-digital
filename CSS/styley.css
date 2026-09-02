@@ -282,6 +282,31 @@ main {
   box-sizing: border-box;
 }
 
+.content.band {
+  position: relative;
+  isolation: isolate;
+  padding-block: 2rem;
+}
+
+.content.band::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+}
+
+.content.band-steel {
+  color: var(--color-text-reversed);
+}
+
+.content.band-steel::before {
+  background-color: var(--color-brand-secondary);
+}
+
 main > section {
   width: 100%;
 }

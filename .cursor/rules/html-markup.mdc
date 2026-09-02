@@ -1,0 +1,35 @@
+---
+description: Prefer minimal HTML nesting for layout and styling
+globs: **/*.{html,css}
+alwaysApply: false
+---
+
+# HTML markup — minimize nesting
+
+All else being equal, prioritize fewer nested HTML elements.
+
+If styling can be accomplished with one wrapper, prefer that over a wrapper plus an inner wrapper.
+
+## This project
+
+- **Layout column**: `.content` — max-width, centering, horizontal padding.
+- **Full-bleed band**: combine on one element — `.content.band.band-steel` — not `.band > .content`.
+- **Section grouping**: use semantic `<section>` directly; no redundant wrapper classes.
+- **Exception**: keep an extra wrapper only when required (e.g. `.hero-slot` for quote overlay positioning).
+
+## Examples
+
+```html
+<!-- Prefer -->
+<div class="content band band-steel">
+  <h2>What we do</h2>
+  <p>…</p>
+</div>
+
+<!-- Avoid when one element suffices -->
+<div class="band band-steel">
+  <div class="content">…</div>
+</div>
+```
+
+When adding a new pattern, reach for combined classes or pseudo-elements (`::before` for full-bleed backgrounds) before introducing another DOM layer.
