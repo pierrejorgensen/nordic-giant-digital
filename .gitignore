@@ -4,3 +4,5 @@ _site/
 .DS_Store
 Assets/.DS_Store
 animations.html
+futhark-export.html
+futhark.html

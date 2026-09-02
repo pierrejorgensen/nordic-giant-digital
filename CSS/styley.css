@@ -287,6 +287,7 @@ main {
   position: relative;
   isolation: isolate;
   padding-block: 2rem;
+  margin-bottom: var(--vertical-space-default);
 }
 
 .content.band::before {
@@ -471,37 +472,57 @@ main > section {
 }
 
 .service-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: 0;
+  padding: 0;
+}
+
+.service-list dt,
+.service-list dd {
   margin: 0;
   padding: 0;
 }
 
 .service-list dt {
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .service-list dd {
-  margin: 0 0 2.5rem 0;
-  padding: 0;
+  margin-bottom: var(--vertical-space-default);
+}
+
+.service-list dd:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 460px) {
+  .service-list dt {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 48rem) {
+  .service-list {
+    grid-template-columns: 1fr 2fr;
+    column-gap: 2rem;
+    row-gap: var(--vertical-space-default);
+  }
+
+  .service-list dd {
+    margin-bottom: 0;
+  }
 }
 
 .service-eyebrow {
   display: block;
+  margin: 0 0 0.25rem 0;
   padding: 0;
   color: var(--color-brand-secondary);
   font-size: inherit;
   font-weight: 400;
-}
-
-.service-list dt .service-eyebrow {
-  font-size: 1rem;
-  font-weight: 400;
-}
-
-.service-list dd .service-eyebrow {
-  margin-bottom: .35rem;
-  font-size: 1rem;
 }
 
 .prose {
