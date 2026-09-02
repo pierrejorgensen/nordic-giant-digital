@@ -5,7 +5,7 @@
 
   var slot = document.querySelector(".hero-slot");
   var panel = slot && slot.querySelector(".hero-quotes");
-  var headline = slot && slot.querySelector(".hero-slot__headline");
+  var headline = slot && slot.querySelector("h2");
   if (!panel || !headline) {
     return;
   }
