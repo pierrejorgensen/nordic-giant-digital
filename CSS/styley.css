@@ -33,7 +33,7 @@
 
   --width-content: 44rem;
   --padding-inline: 2rem;
-  --vertical-space-default: 2rem;
+  --vertical-space-default: 3rem;
 }
 
 html {
@@ -309,6 +309,10 @@ main {
   background-color: var(--color-brand-secondary);
 }
 
+.content.band-cream::before {
+  background-color: var(--color-brand-subtle);
+}
+
 main > section {
   width: 100%;
 }
@@ -485,9 +489,8 @@ main > section {
 }
 
 .service-list dt {
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-size: 1.5rem;
+  font-weight: 200;
 }
 
 .service-list dd {
@@ -506,7 +509,7 @@ main > section {
 
 @media (min-width: 48rem) {
   .service-list {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 2.5fr 3fr;
     column-gap: 2rem;
     row-gap: var(--vertical-space-default);
   }
@@ -516,13 +519,18 @@ main > section {
   }
 }
 
+@media (max-width: 48rem) {
+  .service-list dt {
+    margin-bottom: .5rem;
+  }
+}
+
 .service-eyebrow {
   display: block;
-  margin: 0 0 0.25rem 0;
-  padding: 0;
   color: var(--color-brand-secondary);
-  font-size: inherit;
-  font-weight: 400;
+  font-size: 1rem;
+  letter-spacing: -.04rem;
+  font-weight: 300;
 }
 
 .prose {
