@@ -159,11 +159,19 @@ header {
 
 .header-contact a,
 .header-contact a:visited,
-.header-contact a:link {
+.header-contact a:link,
+.band-slate a,
+.band-slate a:visited,
+.band-slate a:link,
+.band-steel a,
+.band-steel a:visited,
+.band-steel a:link {
   color: var(--color-text-reversed);
 }
 
-.header-contact a:hover {
+.header-contact a:hover,
+.band-slate a,
+.band-steel a {
   color: #e5e0d8;
   text-decoration: underline;
 }
@@ -638,6 +646,10 @@ main > section {
 
 #contact {
   scroll-margin-top: 2rem;
+}
+
+.contact-form {
+    margin-top: 2rem;
 }
 
 .contact-form label {
