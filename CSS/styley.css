@@ -108,7 +108,7 @@ h2 {
 }
 
 h3 {
-    margin: 2rem 0 .5rem 0;
+  margin: 2rem 0 .5rem 0;
 }
 
 h3, .service-list dt {
@@ -622,52 +622,16 @@ main > section {
   font-weight: 500;
 }
 
-.contact-form input:not([hidden]),
+/* Fields — hairline treatment */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
 .contact-form textarea {
   display: block;
   width: 100%;
   max-width: 32rem;
   box-sizing: border-box;
   margin: 0 0 1.25rem 0;
-  padding: .6rem .75rem;
   font: inherit;
-  border: 1px solid var(--color-brand-subtle);
-}
-
-.contact-form textarea {
-  min-height: 8rem;
-  resize: vertical;
-}
-
-.contact-form button {
-  font: inherit;
-  font-weight: 500;
-  padding: .65rem 1.25rem;
-  border: 0;
-  background: var(--color-accent);
-  color: #fff;
-  cursor: pointer;
-}
- /* Forms and form elements */
-.form-status {
-  margin: 1rem 0 0 0;
-  padding: .75rem 1rem;
-  max-width: 32rem;
-}
-
-.form-status.success {
-  border-left: 3px solid var(--color-accent);
-}
-
-.form-status.error {
-  background: #fef2f2;
-  border-left: 3px solid #b91c1c;
-}
-
-/* Fields — hairline treatment */
-.contact-form input[type="text"],
-.contact-form input[type="email"],
-.contact-form textarea {
   appearance: none;
   border: none;
   border-bottom: 1px solid var(--color-text-reversed);
@@ -687,7 +651,6 @@ main > section {
   color: var(--color-text-hint-reversed);
 }
 
-/* Focus — the rule doubles in white */
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
@@ -695,24 +658,22 @@ main > section {
   box-shadow: 0 1px 0 0 var(--color-text-reversed);
 }
 
-/* Error — only after the user has interacted */
 .contact-form input:user-invalid,
 .contact-form textarea:user-invalid {
   border-bottom-color: var(--error);
   box-shadow: 0 1px 0 0 var(--error);
 }
 
-/* Chrome autofill keeps the navy field instead of flashing yellow */
 .contact-form input:-webkit-autofill,
 .contact-form input:-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-text-reversed);
-  box-shadow: 0 1px 0 0 var(--color-text-reversed), inset 0 0 0 100px var(--navy);
+  box-shadow: 0 1px 0 0 var(--color-text-reversed), inset 0 0 0 100px var(--color-brand-primary);
   caret-color: var(--color-text-reversed);
 }
 
-/* Submit */
 .contact-form button[type="submit"] {
-  justify-self: start;
+  font: inherit;
+  font-weight: 500;
   margin-top: .75rem;
   border: none;
   border-radius: 0;
@@ -728,10 +689,6 @@ main > section {
   background: var(--color-text-hint-reversed);
 }
 
-.contact-form button[type="submit"]:active {
-  /* To be determined */
-}
-
 .contact-form button[type="submit"]:focus-visible {
   outline: 1px solid var(--color-text-reversed);
   outline-offset: .1rem;
@@ -741,4 +698,19 @@ main > section {
   background: var(--color-brand-primary);
   color: var(--color-text-hint-reversed);
   cursor: default;
+}
+
+.form-status {
+  margin: 1rem 0 0 0;
+  padding: .75rem 1rem;
+  max-width: 32rem;
+}
+
+.form-status.success {
+  border-left: 3px solid var(--color-accent);
+}
+
+.form-status.error {
+  background: #fef2f2;
+  border-left: 3px solid #b91c1c;
 }
