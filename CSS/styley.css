@@ -619,11 +619,10 @@ main > section {
 .contact-form label {
   display: block;
   margin: 0 0 .35rem 0;
-  font-weight: 500;
 }
 
 /* Fields — hairline treatment */
-.contact-form input[type="text"],
+.contact-form input[type="text"]:not([hidden]),
 .contact-form input[type="email"],
 .contact-form textarea {
   display: block;
@@ -673,11 +672,10 @@ main > section {
 
 .contact-form button[type="submit"] {
   font: inherit;
-  font-weight: 500;
   margin-top: .75rem;
   border: none;
   border-radius: 0;
-  background: var(--color-text-reversed);
+  background: var(--color-brand-subtle);
   color: var(--color-brand-primary);
   padding: 1rem 2rem;
   letter-spacing: 0.01em;
@@ -686,7 +684,7 @@ main > section {
 }
 
 .contact-form button[type="submit"]:hover {
-  background: var(--color-text-hint-reversed);
+  background: var(--color-text-reversed);
 }
 
 .contact-form button[type="submit"]:focus-visible {
