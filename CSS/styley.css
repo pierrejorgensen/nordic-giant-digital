@@ -25,11 +25,13 @@
 :root {
   --color-text: #0b1a23;
   --color-text-reversed: #fff;
+  --color-text-hint-reversed: rgba(173, 181, 189, 0.5);
   --color-accent: #000;
   --color-brand-primary: #314559;
   --color-brand-secondary: #4a6e90;
   --color-brand-subtle: #e5e0d8;
   --color-neutral: #606161;
+  --error: #f0a99a;
 
   --width-content: 44rem;
   --padding-inline: 2rem;
@@ -646,7 +648,7 @@ main > section {
   color: #fff;
   cursor: pointer;
 }
-
+ /* Forms and form elements */
 .form-status {
   margin: 1rem 0 0 0;
   padding: .75rem 1rem;
@@ -660,4 +662,83 @@ main > section {
 .form-status.error {
   background: #fef2f2;
   border-left: 3px solid #b91c1c;
+}
+
+/* Fields — hairline treatment */
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+  appearance: none;
+  border: none;
+  border-bottom: 1px solid var(--color-text-reversed);
+  border-radius: 0;
+  background: transparent;
+  padding: .6rem .2rem;
+  color: var(--color-text-reversed);
+  transition: border-color 140ms, box-shadow 140ms;
+}
+
+.contact-form textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.contact-form ::placeholder {
+  color: var(--color-text-hint-reversed);
+}
+
+/* Focus — the rule doubles in white */
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-bottom-color: var(--color-text-reversed);
+  box-shadow: 0 1px 0 0 var(--color-text-reversed);
+}
+
+/* Error — only after the user has interacted */
+.contact-form input:user-invalid,
+.contact-form textarea:user-invalid {
+  border-bottom-color: var(--error);
+  box-shadow: 0 1px 0 0 var(--error);
+}
+
+/* Chrome autofill keeps the navy field instead of flashing yellow */
+.contact-form input:-webkit-autofill,
+.contact-form input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text-reversed);
+  box-shadow: 0 1px 0 0 var(--color-text-reversed), inset 0 0 0 100px var(--navy);
+  caret-color: var(--color-text-reversed);
+}
+
+/* Submit */
+.contact-form button[type="submit"] {
+  justify-self: start;
+  margin-top: .75rem;
+  border: none;
+  border-radius: 0;
+  background: var(--color-text-reversed);
+  color: var(--color-brand-primary);
+  padding: 1rem 2rem;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 140ms, color 140ms;
+}
+
+.contact-form button[type="submit"]:hover {
+  background: var(--color-text-hint-reversed);
+}
+
+.contact-form button[type="submit"]:active {
+  /* To be determined */
+}
+
+.contact-form button[type="submit"]:focus-visible {
+  outline: 1px solid var(--color-text-reversed);
+  outline-offset: .1rem;
+}
+
+.contact-form button[type="submit"]:disabled {
+  background: var(--color-brand-primary);
+  color: var(--color-text-hint-reversed);
+  cursor: default;
 }
