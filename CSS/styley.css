@@ -340,7 +340,8 @@ main {
   width: 100vw;
 }
 
-.content.band-steel {
+
+.content.band-steel, .content.band-slate {
   color: var(--color-text-reversed);
 }
 
@@ -350,6 +351,10 @@ main {
 
 .content.band-cream::before {
   background-color: var(--color-brand-subtle);
+}
+
+.content.band-slate::before {
+  background-color: var(--color-brand-primary);
 }
 
 main > section {
