@@ -301,6 +301,11 @@ main {
   margin-bottom: var(--vertical-space-default);
 }
 
+.content.band > :last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
 .content.band::before {
   content: "";
   position: absolute;
