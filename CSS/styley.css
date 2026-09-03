@@ -105,6 +105,12 @@ h3 {
   font-size: 1.5rem;
 }
 
+h4 {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
+
 ul {
   padding-right: 0;
   padding-left: 1rem;
@@ -531,6 +537,38 @@ main > section {
   font-size: 1rem;
   letter-spacing: -.04rem;
   font-weight: 300;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--vertical-space-default);
+}
+
+@media (min-width: 48rem) {
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 0;
+  }
+}
+
+.team-member__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.team-member__photo {
+  flex-shrink: 0;
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: var(--color-brand-subtle);
+}
+
+.team-member p:last-child {
+  padding-bottom: 0;
 }
 
 .prose {
