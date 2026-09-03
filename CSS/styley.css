@@ -650,21 +650,21 @@ main > section {
   color: var(--color-text-hint-reversed);
 }
 
-.contact-form input:focus,
+.contact-form input:not([hidden]):focus,
 .contact-form textarea:focus {
   outline: none;
   border-bottom-color: var(--color-text-reversed);
   box-shadow: 0 1px 0 0 var(--color-text-reversed);
 }
 
-.contact-form input:user-invalid,
+.contact-form input:not([hidden]):user-invalid,
 .contact-form textarea:user-invalid {
   border-bottom-color: var(--error);
   box-shadow: 0 1px 0 0 var(--error);
 }
 
-.contact-form input:-webkit-autofill,
-.contact-form input:-webkit-autofill:focus {
+.contact-form input:not([hidden]):-webkit-autofill,
+.contact-form input:not([hidden]):-webkit-autofill:focus {
   -webkit-text-fill-color: var(--color-text-reversed);
   box-shadow: 0 1px 0 0 var(--color-text-reversed), inset 0 0 0 100px var(--color-brand-primary);
   caret-color: var(--color-text-reversed);
