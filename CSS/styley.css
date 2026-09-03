@@ -571,7 +571,7 @@ main > section {
   display: block;
   color: var(--color-brand-secondary);
   font-size: 1rem;
-  letter-spacing: -.04rem;
+  letter-spacing: -.04em;
   font-weight: 300;
 }
 
