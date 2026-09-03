@@ -15,7 +15,7 @@ If styling can be accomplished with one wrapper, prefer that over a wrapper plus
 - **Layout column**: `.content` — max-width, centering, horizontal padding.
 - **Full-bleed band**: combine on one element — `.content.band.band-steel` — not `.band > .content`.
 - **Section grouping**: use semantic `<section>` directly; no redundant wrapper classes.
-- **Exception**: keep an extra wrapper only when required (e.g. `.hero-slot` for quote overlay positioning).
+- **Exception**: keep an extra wrapper only when required (e.g. `.hero-slot` for quote overlay positioning, `.band__body` for two-column band layout).
 
 ## Examples
 
