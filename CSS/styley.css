@@ -275,6 +275,30 @@ footer {
   text-align: center;
 }
 
+.footer-logo {
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo svg {
+  display: block;
+  width: 14rem;
+  height: auto;
+  margin-inline: auto;
+}
+
+.footer-logo .logo-landscape__mountain,
+.footer-logo .logo-landscape__name {
+  fill: var(--color-brand-secondary);
+}
+
+.footer-logo .logo-landscape__mountain-overlap {
+  fill: var(--color-brand-primary);
+}
+
+.footer-logo .logo-landscape__digital {
+  fill: var(--color-neutral);
+}
+
 footer p {
   margin: 0;
   padding: 1rem 0 0 0;
