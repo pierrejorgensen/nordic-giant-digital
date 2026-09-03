@@ -379,7 +379,7 @@ main > section {
   background-color: var(--color-brand-secondary);
   color: var(--color-text-reversed);
   font-family: Merriweather, Georgia, "Times New Roman", serif;
-  font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
   font-weight: 300;
   line-height: 1.35;
   opacity: 0;
