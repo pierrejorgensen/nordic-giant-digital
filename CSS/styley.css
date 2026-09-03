@@ -101,8 +101,13 @@ h2 {
 }
 
 h3 {
-  margin: 2rem 0 .25rem 0;
+    margin: 2rem 0 .5rem 0;
+}
+
+h3, .service-list dt {
   font-size: 1.5rem;
+  font-weight: 200;
+  letter-spacing: -.04em;
 }
 
 h4 {
@@ -494,10 +499,6 @@ main > section {
   padding: 0;
 }
 
-.service-list dt {
-  font-size: 1.5rem;
-  font-weight: 200;
-}
 
 .service-list dd {
   margin-bottom: var(--vertical-space-default);
