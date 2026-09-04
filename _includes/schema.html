@@ -1,0 +1,87 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#organization",
+      "name": "Nordic Giant Digital, LLC",
+      "url": "{% env SITE_URL https://nordicgiantdigital.com %}/",
+      "logo": "{% env SITE_URL https://nordicgiantdigital.com %}/Assets/logos/SVG/nordic-giant-landscape.svg",
+      "email": "giant@nordicgiantdigital.com",
+      "telephone": "+1-913-228-3080",
+      "description": "Digital product strategy and delivery — UX, design, brand, and front-end development for businesses that want practical outcomes in plain language.",
+      "areaServed": {
+        "@type": "Country",
+        "name": "United States"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+1-913-228-3080",
+        "email": "giant@nordicgiantdigital.com",
+        "availableLanguage": "English"
+      },
+      "employee": [
+        { "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#traci-meisenheimer" },
+        { "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#per-jorgensen" }
+      ],
+      "knowsAbout": [
+        "UX design",
+        "Product strategy",
+        "Information architecture",
+        "Web design",
+        "Digital product development",
+        "Brand identity",
+        "Front-end development",
+        "Conversion rate optimization",
+        "Usability testing",
+        "Ecommerce"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#traci-meisenheimer",
+      "name": "Traci Meisenheimer",
+      "email": "traci.meisenheimer@nordicgiantdigital.com",
+      "telephone": "+1-913-228-3032",
+      "worksFor": {
+        "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#per-jorgensen",
+      "name": "Per J\u00f8rgensen",
+      "alternateName": "Pierre J\u00f8rgensen",
+      "email": "per.jorgensen@nordicgiantdigital.com",
+      "telephone": "+1-913-228-3080",
+      "worksFor": {
+        "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#organization"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#website",
+      "url": "{% env SITE_URL https://nordicgiantdigital.com %}/",
+      "name": "Nordic Giant Digital",
+      "publisher": {
+        "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#organization"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#webpage",
+      "url": "{% env SITE_URL https://nordicgiantdigital.com %}/",
+      "name": "Nordic Giant Digital, LLC",
+      "description": "Nordic Giant Digital, LLC — digital product strategy and delivery.",
+      "isPartOf": {
+        "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#website"
+      },
+      "about": {
+        "@id": "{% env SITE_URL https://nordicgiantdigital.com %}/#organization"
+      }
+    }
+  ]
+}
+</script>
