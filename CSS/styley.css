@@ -160,7 +160,8 @@ header {
   position: absolute;
   top: var(--popover-top, 4rem);
   right: var(--padding-inline);
-  width: 28rem;
+  width: calc(100vw - 2 * var(--padding-inline));
+  max-width: 28rem;
   box-sizing: border-box;
   padding: 1.5rem 2rem 2rem;
   background-color: var(--color-brand-primary);
