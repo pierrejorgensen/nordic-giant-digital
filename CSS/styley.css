@@ -146,6 +146,56 @@ header {
   align-items: center;
   gap: 2rem;
   background-color: var(--color-brand-primary);
+  position: relative;
+  z-index: 101;
+}
+
+.contact-popover {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+
+.contact-popover__panel {
+  position: absolute;
+  top: var(--popover-top, 4rem);
+  right: var(--padding-inline);
+  width: 28rem;
+  box-sizing: border-box;
+  padding: 1.5rem 2rem 2rem;
+  background-color: var(--color-brand-primary);
+  color: var(--color-text-reversed);
+  box-shadow: 0 12px 40px rgb(0 0 0 / 35%);
+}
+
+.contact-popover__panel::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: var(--popover-pointer-x, 50%);
+  transform: translateX(-50%);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--color-brand-primary);
+}
+
+.contact-popover__panel h2 {
+  margin: 0;
+  padding-bottom: 0.75rem;
+}
+
+.contact-popover__panel a:link,
+.contact-popover__panel a:visited {
+  color: var(--color-text-reversed);
+}
+
+.contact-popover__panel a:hover {
+  color: #e5e0d8;
+  text-decoration: underline;
+}
+
+.contact-popover__panel .contact-form {
+  margin-top: 1.5rem;
 }
 
 .header-contact {
