@@ -18,7 +18,7 @@
     var pointerX =
       triggerRect.left + triggerRect.width / 2 - panelRect.left;
 
-    popover.style.setProperty("--popover-top", headerBottom + "px");
+    popover.style.setProperty("--popover-top", (headerBottom + 10) + "px");
     popover.style.setProperty("--popover-pointer-x", pointerX + "px");
   }
 
