@@ -68,9 +68,15 @@
   }
 
   function computeGeometry(mount) {
-    var rect = mount.getBoundingClientRect();
-    var Wc = Math.max(1, Math.round(rect.width));
-    var Hc = Math.max(1, Math.round(rect.height));
+    var styles = getComputedStyle(mount);
+    var padInline =
+      (parseFloat(styles.paddingLeft) || 0) +
+      (parseFloat(styles.paddingRight) || 0);
+    var padBlock =
+      (parseFloat(styles.paddingTop) || 0) +
+      (parseFloat(styles.paddingBottom) || 0);
+    var Wc = Math.max(1, Math.round(mount.clientWidth - padInline));
+    var Hc = Math.max(1, Math.round(mount.clientHeight - padBlock));
     var k = Hc / DESIGN.H;
     var cx0 = DESIGN.W / 2;
     var cy0 = DESIGN.H / 2;

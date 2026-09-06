@@ -164,6 +164,7 @@
     }
 
     waitGen += 1;
+    paused = false;
 
     if (index < quotes.length - 1) {
       showQuote(index + 1);
@@ -242,20 +243,16 @@
     { threshold: 0.35 }
   ).observe(section);
 
-  panel.addEventListener("mouseenter", function () {
-    paused = true;
+  panel.addEventListener("pointerenter", function (event) {
+    if (event.pointerType === "mouse") {
+      paused = true;
+    }
   });
 
-  panel.addEventListener("mouseleave", function () {
-    paused = false;
-  });
-
-  panel.addEventListener("focusin", function () {
-    paused = true;
-  });
-
-  panel.addEventListener("focusout", function () {
-    paused = false;
+  panel.addEventListener("pointerleave", function (event) {
+    if (event.pointerType === "mouse") {
+      paused = false;
+    }
   });
 
   panel.addEventListener("click", skipAhead);
