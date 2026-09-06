@@ -517,10 +517,8 @@ main > section {
 
 .mark-frame {
   display: block;
-  box-sizing: border-box;
   width: 100%;
   height: 18rem;
-  padding-inline: 30px;
   background: var(--color-brand-primary);
   overflow: hidden;
   pointer-events: none;

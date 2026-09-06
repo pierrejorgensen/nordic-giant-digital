@@ -13,7 +13,12 @@
     WORD_SCALE: 2.1015025743406537,
     WORD_TX: 322.2864348008826,
     WORD_TY: 47.89849742565934,
+    WORD_MAX_X: 264.3,
   };
+
+  // Assembled logo width in design units; wordmark is the widest element.
+  var LOGO_WIDTH = DESIGN.WORD_MAX_X * DESIGN.WORD_SCALE;
+  var LOGO_HORIZONTAL_INSET = 30;
 
   var WORD_PATHS = [
     "M0 91.93V82.55H2.76L2.84 83.57C3.15 83.2 3.55 82.9 4.06 82.67C4.57 82.44 5.09 82.33 5.62 82.33C6.69 82.33 7.54 82.65 8.18 83.29C8.82 83.93 9.14 84.88 9.14 86.13V91.93H6.26V86.53C6.26 86.01 6.13 85.6 5.87 85.29C5.61 84.98 5.25 84.83 4.78 84.83C4.15 84.83 3.68 85.04 3.35 85.45C3.02 85.86 2.86 86.34 2.86 86.89V91.93H0Z",
@@ -68,16 +73,11 @@
   }
 
   function computeGeometry(mount) {
-    var styles = getComputedStyle(mount);
-    var padInline =
-      (parseFloat(styles.paddingLeft) || 0) +
-      (parseFloat(styles.paddingRight) || 0);
-    var padBlock =
-      (parseFloat(styles.paddingTop) || 0) +
-      (parseFloat(styles.paddingBottom) || 0);
-    var Wc = Math.max(1, Math.round(mount.clientWidth - padInline));
-    var Hc = Math.max(1, Math.round(mount.clientHeight - padBlock));
-    var k = Hc / DESIGN.H;
+    var Wc = Math.max(1, Math.round(mount.clientWidth));
+    var Hc = Math.max(1, Math.round(mount.clientHeight));
+    var kHeight = Hc / DESIGN.H;
+    var kWidth = (Wc - 2 * LOGO_HORIZONTAL_INSET) / LOGO_WIDTH;
+    var k = Math.min(kHeight, Math.max(0, kWidth));
     var cx0 = DESIGN.W / 2;
     var cy0 = DESIGN.H / 2;
     var cxC = Wc / 2;
