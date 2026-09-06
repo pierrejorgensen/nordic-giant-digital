@@ -345,17 +345,13 @@ footer {
   margin-inline: auto;
 }
 
-.footer-logo .logo-landscape__mountain,
-.footer-logo .logo-landscape__name {
+.footer-logo .logo-filled__mountain {
   fill: var(--color-brand-secondary);
 }
 
-.footer-logo .logo-landscape__mountain-overlap {
+.footer-logo .logo-filled__mountain-overlap,
+.footer-logo .logo-filled__wordmark {
   fill: var(--color-brand-primary);
-}
-
-.footer-logo .logo-landscape__digital {
-  fill: var(--color-neutral);
 }
 
 footer p {
