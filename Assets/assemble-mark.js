@@ -1,15 +1,20 @@
 (function (global) {
   var EASE = "cubic-bezier(0.9, 1, 0.9, 1)";
 
-  var ASPECT = 1.1547005383792517;
-  var SMALL = { w: 32, h: 27.71281292110203 };
-  var FINAL = { w: 156.76, h: 135.76 };
-  var FINAL_LEFT = { cx: 559.23, cy: 117.88 };
-  var FINAL_RIGHT = { cx: 639.43, cy: 117.88 };
-  var MERGE = { cx: 599.3299999999999, cy: 117.88 };
-  var WORD_SCALE = 2.1015025743406537;
-  var WORD_TX = 322.2864348008826;
-  var WORD_TY = 47.89849742565934;
+  var DESIGN = {
+    W: 1200,
+    H: 300,
+    N: 48,
+    MIN_GAP: 11,
+    SMALL: { w: 32, h: 27.71281292110203 },
+    FINAL: { w: 156.76, h: 135.76 },
+    FINAL_LEFT: { cx: 559.23, cy: 117.88 },
+    FINAL_RIGHT: { cx: 639.43, cy: 117.88 },
+    WORD_SCALE: 2.1015025743406537,
+    WORD_TX: 322.2864348008826,
+    WORD_TY: 47.89849742565934,
+  };
+
   var WORD_PATHS = [
     "M0 91.93V82.55H2.76L2.84 83.57C3.15 83.2 3.55 82.9 4.06 82.67C4.57 82.44 5.09 82.33 5.62 82.33C6.69 82.33 7.54 82.65 8.18 83.29C8.82 83.93 9.14 84.88 9.14 86.13V91.93H6.26V86.53C6.26 86.01 6.13 85.6 5.87 85.29C5.61 84.98 5.25 84.83 4.78 84.83C4.15 84.83 3.68 85.04 3.35 85.45C3.02 85.86 2.86 86.34 2.86 86.89V91.93H0Z",
     "M13.8 87.23C13.8 86.31 14.01 85.47 14.44 84.71C14.87 83.95 15.46 83.35 16.21 82.9C16.96 82.45 17.84 82.23 18.84 82.23C19.84 82.23 20.72 82.45 21.47 82.9C22.22 83.35 22.81 83.95 23.23 84.71C23.65 85.47 23.86 86.31 23.86 87.23C23.86 88.15 23.65 88.99 23.23 89.75C22.81 90.51 22.22 91.12 21.47 91.57C20.72 92.02 19.84 92.25 18.84 92.25C17.84 92.25 16.96 92.02 16.21 91.57C15.46 91.12 14.87 90.51 14.44 89.75C14.01 88.99 13.8 88.15 13.8 87.23ZM18.84 89.75C19.33 89.75 19.74 89.63 20.07 89.39C20.4 89.15 20.65 88.84 20.82 88.45C20.99 88.06 21.08 87.66 21.08 87.23C21.08 86.8 20.99 86.4 20.82 86.02C20.65 85.64 20.4 85.33 20.07 85.09C19.74 84.85 19.33 84.73 18.84 84.73C18.35 84.73 17.95 84.85 17.61 85.09C17.27 85.33 17.01 85.64 16.84 86.02C16.67 86.4 16.58 86.8 16.58 87.23C16.58 87.66 16.67 88.06 16.84 88.45C17.01 88.84 17.27 89.15 17.61 89.39C17.95 89.63 18.36 89.75 18.84 89.75Z",
@@ -31,20 +36,8 @@
     "M257.48 91.93V81.26H258.25V91.21H264.3V91.93H257.48Z",
   ];
 
-  var TRI_COUNT = 48;
-  var LEFT_KEEP_INDEX = 5;
-  var RIGHT_KEEP_INDEX = 42;
   var LOADING_OPACITY = 0.1;
   var REVEAL_MS = 600;
-
-  var SCATTER_RADIUS = 21.166010488516722;
-  var MIN_GAP = 11;
-  var SCATTER_BOUNDS = {
-    x0: 21.166010488516722,
-    x1: 1178.8339895114832,
-    y0: 21.166010488516722,
-    y1: 278.83398951148325,
-  };
 
   var NS = "http://www.w3.org/2000/svg";
 
@@ -74,19 +67,105 @@
     return el;
   }
 
-  function buildSVG(mount) {
-    var svg = svgEl("svg", { viewBox: "0 0 1200 300", "aria-hidden": "true" });
+  function computeGeometry(mount) {
+    var rect = mount.getBoundingClientRect();
+    var Wc = Math.max(1, Math.round(rect.width));
+    var Hc = Math.max(1, Math.round(rect.height));
+    var k = Hc / DESIGN.H;
+    var cx0 = DESIGN.W / 2;
+    var cy0 = DESIGN.H / 2;
+    var cxC = Wc / 2;
+    var cyC = Hc / 2;
+
+    function pt(p) {
+      return { cx: (p.cx - cx0) * k + cxC, cy: (p.cy - cy0) * k + cyC };
+    }
+
+    function len(v) {
+      return v * k;
+    }
+
+    var SMALL = { w: len(DESIGN.SMALL.w), h: len(DESIGN.SMALL.h) };
+    var FINAL = { w: len(DESIGN.FINAL.w), h: len(DESIGN.FINAL.h) };
+    var FINAL_LEFT = pt(DESIGN.FINAL_LEFT);
+    var FINAL_RIGHT = pt(DESIGN.FINAL_RIGHT);
+    var MERGE = { cx: (FINAL_LEFT.cx + FINAL_RIGHT.cx) / 2, cy: FINAL_LEFT.cy };
+    var wordAnchor = pt({ cx: DESIGN.WORD_TX, cy: DESIGN.WORD_TY });
+
+    var SCATTER_RADIUS = Math.sqrt(
+      Math.pow(SMALL.w / 2, 2) + Math.pow(SMALL.h / 2, 2)
+    );
+    var MIN_GAP = len(DESIGN.MIN_GAP);
+    var SCATTER_BOUNDS = {
+      x0: -SCATTER_RADIUS,
+      x1: Wc + SCATTER_RADIUS,
+      y0: -SCATTER_RADIUS,
+      y1: Hc + SCATTER_RADIUS,
+    };
+
+    var DESIGN_R = Math.sqrt(
+      Math.pow(DESIGN.SMALL.w / 2, 2) + Math.pow(DESIGN.SMALL.h / 2, 2)
+    );
+    var designBoundsW = DESIGN.W + 2 * DESIGN_R;
+    var designBoundsH = DESIGN.H + 2 * DESIGN_R;
+    var boundsW = SCATTER_BOUNDS.x1 - SCATTER_BOUNDS.x0;
+    var boundsH = SCATTER_BOUNDS.y1 - SCATTER_BOUNDS.y0;
+    var areaRatio = (boundsW / designBoundsW) * (boundsH / designBoundsH);
+    var TRI_COUNT = Math.max(
+      16,
+      Math.min(80, Math.round(DESIGN.N * areaRatio))
+    );
+    var LEFT_KEEP_INDEX = Math.floor(TRI_COUNT * 0.1);
+    var RIGHT_KEEP_INDEX = Math.min(
+      TRI_COUNT - 1,
+      Math.floor(TRI_COUNT * 0.85)
+    );
+    if (RIGHT_KEEP_INDEX === LEFT_KEEP_INDEX) {
+      RIGHT_KEEP_INDEX = Math.min(TRI_COUNT - 1, LEFT_KEEP_INDEX + 1);
+    }
+
+    return {
+      Wc: Wc,
+      Hc: Hc,
+      k: k,
+      SMALL: SMALL,
+      FINAL: FINAL,
+      FINAL_LEFT: FINAL_LEFT,
+      FINAL_RIGHT: FINAL_RIGHT,
+      MERGE: MERGE,
+      WORD_SCALE: len(DESIGN.WORD_SCALE),
+      WORD_TX: wordAnchor.cx,
+      WORD_TY: wordAnchor.cy,
+      SCATTER_RADIUS: SCATTER_RADIUS,
+      MIN_GAP: MIN_GAP,
+      SCATTER_BOUNDS: SCATTER_BOUNDS,
+      TRI_COUNT: TRI_COUNT,
+      LEFT_KEEP_INDEX: LEFT_KEEP_INDEX,
+      RIGHT_KEEP_INDEX: RIGHT_KEEP_INDEX,
+    };
+  }
+
+  function buildSVG(mount, geo) {
+    var svg = svgEl("svg", {
+      viewBox: "0 0 " + geo.Wc + " " + geo.Hc,
+      "aria-hidden": "true",
+    });
+    svg.style.height = geo.Hc + "px";
 
     var tris = [];
-    for (var i = 0; i < TRI_COUNT; i++) {
+    for (var i = 0; i < geo.TRI_COUNT; i++) {
       var path = svgEl("path", {
         class: "tri",
-        d: triD(MERGE.cx, MERGE.cy, SMALL.w, SMALL.h),
+        d: triD(geo.MERGE.cx, geo.MERGE.cy, geo.SMALL.w, geo.SMALL.h),
       });
       path.style.transformBox = "view-box";
-      path.style.transformOrigin = MERGE.cx + "px " + MERGE.cy + "px";
+      path.style.transformOrigin = geo.MERGE.cx + "px " + geo.MERGE.cy + "px";
       path.dataset.keep =
-        i === LEFT_KEEP_INDEX ? "left" : i === RIGHT_KEEP_INDEX ? "right" : "";
+        i === geo.LEFT_KEEP_INDEX
+          ? "left"
+          : i === geo.RIGHT_KEEP_INDEX
+            ? "right"
+            : "";
       svg.appendChild(path);
       tris.push(path);
     }
@@ -95,7 +174,13 @@
     wm.style.transformBox = "view-box";
     var glyphs = svgEl("g", {
       transform:
-        "translate(" + WORD_TX + "," + WORD_TY + ") scale(" + WORD_SCALE + ")",
+        "translate(" +
+        geo.WORD_TX +
+        "," +
+        geo.WORD_TY +
+        ") scale(" +
+        geo.WORD_SCALE +
+        ")",
     });
     WORD_PATHS.forEach(function (d) {
       glyphs.appendChild(svgEl("path", { d: d }));
@@ -122,9 +207,10 @@
     return best;
   }
 
-  function scatterPositions(n) {
-    var boundsW = SCATTER_BOUNDS.x1 - SCATTER_BOUNDS.x0;
-    var boundsH = SCATTER_BOUNDS.y1 - SCATTER_BOUNDS.y0;
+  function scatterPositions(n, geo) {
+    var bounds = geo.SCATTER_BOUNDS;
+    var boundsW = bounds.x1 - bounds.x0;
+    var boundsH = bounds.y1 - bounds.y0;
     var grid = pickGrid(n, boundsW / boundsH);
     var cols = grid.cols;
     var rows = grid.rows;
@@ -137,8 +223,8 @@
     for (var i = 0; i < n; i++) {
       var col = i % cols;
       var row = Math.floor(i / cols);
-      var baseX = SCATTER_BOUNDS.x0 + (col + 0.5) * cellW;
-      var baseY = SCATTER_BOUNDS.y0 + (row + 0.5) * cellH;
+      var baseX = bounds.x0 + (col + 0.5) * cellW;
+      var baseY = bounds.y0 + (row + 0.5) * cellH;
       var tries = 0;
       var found = null;
       while (tries < 300 && !found) {
@@ -149,7 +235,10 @@
           var p = placed[j];
           var dx = p.x - x;
           var dy = p.y - y;
-          if (Math.sqrt(dx * dx + dy * dy) < SCATTER_RADIUS * 2 + MIN_GAP) {
+          if (
+            Math.sqrt(dx * dx + dy * dy) <
+            geo.SCATTER_RADIUS * 2 + geo.MIN_GAP
+          ) {
             ok = false;
             break;
           }
@@ -165,17 +254,16 @@
   }
 
   function AssembleMark(mount) {
-    var built = buildSVG(mount);
     this.mount = mount;
+    this.geo = computeGeometry(mount);
+    var built = buildSVG(mount, this.geo);
     this.svg = built.svg;
     this.tris = built.tris;
     this.wordmark = built.wordmark;
     this.playing = false;
 
     this.hardReset();
-
     mount.ngPlay = this.play.bind(this);
-    mount.addEventListener("assemble:play", this.play.bind(this));
   }
 
   AssembleMark.prototype.reduced = function () {
@@ -184,7 +272,15 @@
 
   AssembleMark.prototype.transformCSS = function (tx, ty, deg, s) {
     return (
-      "translate(" + tx + "px," + ty + "px) rotate(" + deg + "deg) scale(" + s + ")"
+      "translate(" +
+      tx +
+      "px," +
+      ty +
+      "px) rotate(" +
+      deg +
+      "deg) scale(" +
+      s +
+      ")"
     );
   };
 
@@ -196,12 +292,13 @@
   };
 
   AssembleMark.prototype.hardReset = function () {
-    var scatter = scatterPositions(this.tris.length);
+    var geo = this.geo;
+    var scatter = scatterPositions(this.tris.length, geo);
     this.tris.forEach(function (tri, i) {
       var p = scatter[i];
       tri.style.transition = "none";
       tri.style.opacity = String(LOADING_OPACITY);
-      this.setT(tri, p.x - MERGE.cx, p.y - MERGE.cy, p.rot, 1, 0);
+      this.setT(tri, p.x - geo.MERGE.cx, p.y - geo.MERGE.cy, p.rot, 1, 0);
     }, this);
     this.wordmark.style.transition = "none";
     this.wordmark.style.opacity = "0";
@@ -210,17 +307,18 @@
   };
 
   AssembleMark.prototype.finishInstant = function () {
+    var geo = this.geo;
     this.tris.forEach(function (tri) {
       tri.style.transition = "none";
       if (tri.dataset.keep) {
         tri.style.opacity = "1";
-        var target = tri.dataset.keep === "left" ? FINAL_LEFT : FINAL_RIGHT;
+        var target = tri.dataset.keep === "left" ? geo.FINAL_LEFT : geo.FINAL_RIGHT;
         this.setT(
           tri,
-          target.cx - MERGE.cx,
-          target.cy - MERGE.cy,
+          target.cx - geo.MERGE.cx,
+          target.cy - geo.MERGE.cy,
           0,
-          FINAL.w / SMALL.w,
+          geo.FINAL.w / geo.SMALL.w,
           0
         );
       } else {
@@ -256,7 +354,8 @@
 
   AssembleMark.prototype.mergeToOne = function () {
     var self = this;
-    var scale = FINAL.w / SMALL.w;
+    var geo = this.geo;
+    var scale = geo.FINAL.w / geo.SMALL.w;
     this.tris.forEach(function (tri, i) {
       var stagger = (i % 6) * 18;
       var moveT = "transform 1800ms " + EASE + " " + stagger + "ms";
@@ -276,16 +375,17 @@
 
   AssembleMark.prototype.split = function () {
     var self = this;
-    var scale = FINAL.w / SMALL.w;
+    var geo = this.geo;
+    var scale = geo.FINAL.w / geo.SMALL.w;
     this.tris.forEach(function (tri) {
       if (!tri.dataset.keep) {
         return;
       }
-      var target = tri.dataset.keep === "left" ? FINAL_LEFT : FINAL_RIGHT;
+      var target = tri.dataset.keep === "left" ? geo.FINAL_LEFT : geo.FINAL_RIGHT;
       tri.style.transition = "transform 900ms " + EASE;
       tri.style.transform = self.transformCSS(
-        target.cx - MERGE.cx,
-        target.cy - MERGE.cy,
+        target.cx - geo.MERGE.cx,
+        target.cy - geo.MERGE.cy,
         0,
         scale
       );

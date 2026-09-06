@@ -17,7 +17,6 @@
   var phase = "idle";
   var waitGen = 0;
   var mark = null;
-  var markScriptPromise = null;
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (reduced) {
@@ -71,32 +70,17 @@
     });
   }
 
-  function loadAssembleMarkScript() {
-    if (markScriptPromise) {
-      return markScriptPromise;
+  function initMark() {
+    if (!window.AssembleMark) {
+      return Promise.reject(new Error("AssembleMark not loaded"));
     }
 
-    markScriptPromise = new Promise(function (resolve, reject) {
-      var script = document.createElement("script");
-      script.src = "/Assets/assemble-mark.js";
-      script.onload = function () {
-        resolve(window.AssembleMark);
-      };
-      script.onerror = reject;
-      document.body.appendChild(script);
-    });
+    if (!mark) {
+      mark = new window.AssembleMark(mount);
+      mount.addEventListener("assemble:complete", onAnimationComplete);
+    }
 
-    return markScriptPromise;
-  }
-
-  function ensureMark() {
-    return loadAssembleMarkScript().then(function (AssembleMark) {
-      if (!mark) {
-        mark = new AssembleMark(mount);
-        mount.addEventListener("assemble:complete", onAnimationComplete);
-      }
-      return mark;
-    });
+    return Promise.resolve(mark);
   }
 
   function setMountInteractive(on) {
@@ -136,14 +120,13 @@
     phase = "animating";
     setMountInteractive(false);
 
-    try {
-      var assembleMark = await ensureMark();
-      assembleMark.play();
-    } catch (error) {
+    if (!mark) {
       phase = "complete";
       section.classList.add("is-complete");
-      console.error(error);
+      return;
     }
+
+    mark.play();
   }
 
   async function finishQuotes() {
@@ -284,5 +267,11 @@
     }
   });
 
-  runQuotes();
+  initMark()
+    .then(function () {
+      runQuotes();
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 })();
