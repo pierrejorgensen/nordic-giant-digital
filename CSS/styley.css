@@ -93,7 +93,7 @@ h2, h3 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2.75rem;
   padding-bottom: 1rem;
   letter-spacing: -.05em;
 }
@@ -494,6 +494,7 @@ main > section {
 }
 
 .customer-quotes-section {
+  margin-top: var(--vertical-space-default);
   margin-bottom: var(--vertical-space-default);
 }
 
