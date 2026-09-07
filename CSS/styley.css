@@ -710,18 +710,8 @@ main > section {
   }
 }
 
-.team-member__header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.team-member__photo {
-  flex-shrink: 0;
-  width: 4.5rem;
-  height: 4.5rem;
-  background-color: var(--color-brand-subtle);
+.team-grid img {
+  width: 100%;
 }
 
 .team-member p:last-child {
