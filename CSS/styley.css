@@ -32,7 +32,6 @@
   --color-brand-subtle: #e5e0d8;
   --color-neutral: #606161;
   --error: #f0a99a;
-
   --width-content: 44rem;
   --padding-inline: 2rem;
   --vertical-space-default: 3rem;
@@ -76,6 +75,7 @@ h1 {
   font-weight: 900;
   letter-spacing: -.04em;
 }
+
 @media screen and (max-width: 630px) {
   h1 {
     font-size: 3.5rem;
@@ -102,6 +102,7 @@ h2 {
   h2 {
     font-size: 2.25rem;
   }
+
   section h2 {
     margin-top: 1rem;
   }
@@ -292,6 +293,7 @@ header img,
 }
 
 @keyframes logo-separate-left {
+
   0%,
   58% {
     transform: translateX(12.3px);
@@ -303,6 +305,7 @@ header img,
 }
 
 @keyframes logo-separate-right {
+
   0%,
   58% {
     transform: translateX(-12.3px);
@@ -314,6 +317,7 @@ header img,
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .site-logo .mountain-left,
   .site-logo .mountain-right {
     transform: translateX(0);
@@ -387,7 +391,7 @@ main {
   margin-bottom: var(--vertical-space-default);
 }
 
-.content.band > .band__body > :last-child {
+.content.band>.band__body> :last-child {
   margin-bottom: 0;
   padding-bottom: 0;
 }
@@ -400,11 +404,11 @@ main {
     align-items: start;
   }
 
-  .content.band > h2 {
+  .content.band>h2 {
     grid-column: 1;
   }
 
-  .content.band > .band__body {
+  .content.band>.band__body {
     grid-column: 2;
     min-width: 0;
   }
@@ -420,7 +424,6 @@ main {
   transform: translateX(-50%);
   width: 100vw;
 }
-
 
 .content.band-steel, .content.band-slate {
   color: var(--color-text-reversed);
@@ -438,7 +441,7 @@ main {
   background-color: var(--color-brand-primary);
 }
 
-main > section {
+main>section {
   width: 100%;
 }
 
@@ -600,6 +603,7 @@ main > section {
 }
 
 @media screen and (max-width: 460px) {
+
   .customer-quotes__stage,
   .mark-frame {
     height: 16rem;
@@ -639,9 +643,31 @@ main > section {
   display: block;
 }
 
-.two-fer > span:first-child {
+.two-fer>span:first-child {
   margin-bottom: 1rem;
   color: var(--color-brand-secondary);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr {
+  display: grid;
+  grid-template-columns: var(--grid-columns);
+  column-gap: var(--grid-column-gap);
+  align-items: start;
+}
+
+th, td {
+    padding-bottom: .5rem;
+}
+
+th {
+    font-weight: 600;
+    text-align: left;
+    color: #4a6e90;
 }
 
 .service-list {
@@ -656,7 +682,6 @@ main > section {
   margin: 0;
   padding: 0;
 }
-
 
 .service-list dd {
   margin-bottom: var(--vertical-space-default);
@@ -730,7 +755,7 @@ main > section {
 }
 
 .contact-form {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }
 
 .contact-form label {
