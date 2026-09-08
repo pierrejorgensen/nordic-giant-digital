@@ -685,7 +685,7 @@ th {
 }
 
 .service-list dd {
-  margin-bottom: var(--vertical-space-default);
+  margin-bottom: 1rem;
 }
 
 .service-list dd:last-of-type {
