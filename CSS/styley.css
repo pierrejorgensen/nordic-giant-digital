@@ -49,6 +49,31 @@ body {
   margin: 0;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 1px solid rgba(11, 26, 35, 0.5);
+  outline-offset: 2px;
+}
+
+header :focus-visible,
+.band-slate :focus-visible,
+.band-steel :focus-visible,
+.customer-quotes-band :focus-visible,
+.contact-popover :focus-visible {
+  outline-color: rgba(255, 255, 255, 0.5);
+}
+
 @media screen and (max-width: 460px) {
   body {
     font-size: 15px;
@@ -190,11 +215,11 @@ header {
 .contact-popover__panel a:link,
 .contact-popover__panel a:visited {
   color: var(--color-text-reversed);
+  text-decoration: underline;
 }
 
 .contact-popover__panel a:hover {
   color: #e5e0d8;
-  text-decoration: underline;
 }
 
 .contact-popover__panel .contact-form {
@@ -210,9 +235,22 @@ header {
   padding: 0;
 }
 
-.header-contact a,
-.header-contact a:visited,
-.header-contact a:link,
+.header-contact__trigger {
+  font: inherit;
+  font-weight: inherit;
+  color: var(--color-text-reversed);
+  text-decoration: underline;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.header-contact__trigger:hover {
+  color: #e5e0d8;
+}
+
 .band-slate a,
 .band-slate a:visited,
 .band-slate a:link,
@@ -220,13 +258,12 @@ header {
 .band-steel a:visited,
 .band-steel a:link {
   color: var(--color-text-reversed);
+  text-decoration: underline;
 }
 
-.header-contact a:hover,
-.band-slate a,
-.band-steel a {
+.band-slate a:hover,
+.band-steel a:hover {
   color: #e5e0d8;
-  text-decoration: underline;
 }
 
 header img,
@@ -482,11 +519,6 @@ main>section {
   stroke-linecap: butt;
 }
 
-.section-divider:focus-visible {
-  outline: 1px solid var(--color-brand-primary);
-  outline-offset: 4px;
-}
-
 .hero-slot {
   width: 100%;
   padding-bottom: 1rem;
@@ -574,11 +606,6 @@ main>section {
   transition: opacity 700ms cubic-bezier(0.9, 1, 0.9, 1);
 }
 
-.customer-quotes:focus-visible {
-  outline: 1px solid var(--color-text-reversed);
-  outline-offset: 4px;
-}
-
 .customer-quote {
   grid-area: 1 / 1;
   display: block;
@@ -654,21 +681,27 @@ table {
   margin-bottom: 1rem;
 }
 
-tr {
-  display: grid;
-  grid-template-columns: var(--grid-columns);
-  column-gap: var(--grid-column-gap);
-  align-items: start;
+tbody {
+  display: table-row-group;
 }
 
-th, td {
-    padding-bottom: .5rem;
+tr {
+  display: table-row;
+}
+
+th,
+td {
+  display: table-cell;
+  padding-bottom: .5rem;
+  vertical-align: top;
 }
 
 th {
-    font-weight: 600;
-    text-align: left;
-    color: #4a6e90;
+  width: 38%;
+  padding-right: var(--grid-column-gap);
+  font-weight: 600;
+  text-align: left;
+  color: #4a6e90;
 }
 
 .service-list {
@@ -789,15 +822,15 @@ th {
   resize: vertical;
 }
 
-.contact-form ::placeholder {
-  color: var(--color-text-hint-reversed);
-}
-
 .contact-form input:not([hidden]):focus,
 .contact-form textarea:focus {
-  outline: none;
   border-bottom-color: var(--color-text-reversed);
   box-shadow: 0 1px 0 0 var(--color-text-reversed);
+}
+
+.contact-form input:not([hidden]):focus:not(:focus-visible),
+.contact-form textarea:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .contact-form input:not([hidden]):user-invalid,
@@ -828,11 +861,6 @@ th {
 
 .contact-form button[type="submit"]:hover {
   background: var(--color-text-reversed);
-}
-
-.contact-form button[type="submit"]:focus-visible {
-  outline: 1px solid var(--color-text-reversed);
-  outline-offset: .1rem;
 }
 
 .contact-form button[type="submit"]:disabled {
