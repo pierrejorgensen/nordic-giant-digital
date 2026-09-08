@@ -702,7 +702,7 @@ th {
   .service-list {
     grid-template-columns: var(--grid-columns);
     column-gap: var(--grid-column-gap);
-    row-gap: var(--vertical-space-default);
+    row-gap: 1rem;
   }
 
   .service-list dd {
