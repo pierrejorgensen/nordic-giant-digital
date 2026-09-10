@@ -15,7 +15,11 @@ INCLUDE_PATTERN = re.compile(r"\{%\s*include\s+([^%]+?)\s*%\}")
 ENV_PATTERN = re.compile(r"\{%\s*env\s+([A-Z0-9_]+)(?:\s+([^%]*?))?\s*%\}")
 FRONT_MATTER_PATTERN = re.compile(r"\A---\r?\n.*?\r?\n---\r?\n", re.DOTALL)
 COPY_DIRS = ("Assets", "CSS")
-HTML_SOURCES = [ROOT / "index.html", *(ROOT / "p").glob("*.html")]
+HTML_SOURCES = [
+    ROOT / "index.html",
+    *(ROOT / "p").glob("*.html"),
+    *(ROOT / "articles").glob("**/*.html"),
+]
 
 
 def load_env() -> dict[str, str]:

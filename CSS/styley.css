@@ -883,3 +883,43 @@ th {
   background: #fef2f2;
   border-left: 3px solid #b91c1c;
 }
+
+.article-back {
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+}
+
+.article-eyebrow {
+  display: block;
+  margin: 0 0 .75rem 0;
+  padding: 0;
+  color: var(--color-brand-secondary);
+  font-size: 1rem;
+  letter-spacing: -.04em;
+  font-weight: 300;
+}
+
+.article h1 {
+  margin-bottom: .5rem;
+  font-size: 2.75rem;
+}
+
+.article-byline {
+  margin: 0 0 2rem 0;
+  padding: 0;
+  color: var(--color-brand-secondary);
+}
+
+.article-index h2 {
+  margin-top: 2rem;
+  font-weight: 300;
+}
+
+.article-index h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.article-index h2 a:hover {
+  text-decoration: underline;
+}
