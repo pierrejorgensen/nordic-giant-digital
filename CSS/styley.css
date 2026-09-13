@@ -428,6 +428,7 @@ main {
   margin-bottom: var(--vertical-space-default);
 }
 
+.content.band>.band__intro> :last-child,
 .content.band>.band__body> :last-child {
   margin-bottom: 0;
   padding-bottom: 0;
@@ -441,7 +442,8 @@ main {
     align-items: start;
   }
 
-  .content.band>h2 {
+  .content.band>h2,
+  .content.band>.band__intro {
     grid-column: 1;
   }
 
