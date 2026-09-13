@@ -27,6 +27,8 @@ The home page includes a contact form that posts to [Formspree](https://formspre
 
 For GitHub Pages deploys, add the same value as a repository secret named `FORMSPREE_FORM_ID` (Settings → Secrets and variables → Actions).
 
+The second-opinion landing page form uses a separate Formspree form. Set `FORMSPREE_FORM_ID_SECOND_OPINION` in `.env` locally and as a GitHub Actions secret for deploys. Include it on a page with `{% include second-opinion-form.html suffix= %}`.
+
 The form uses AJAX (see `Assets/contact-form.js`) so visitors stay on the page after submitting.
 
 ## GitHub Pages
@@ -35,7 +37,7 @@ If you host on GitHub Pages:
 
 1. Push this repo to GitHub.
 2. Settings → Pages → Build and deployment → Source: **GitHub Actions**.
-3. Add the `FORMSPREE_FORM_ID` secret (see above).
+3. Add the `FORMSPREE_FORM_ID` and `FORMSPREE_FORM_ID_SECOND_OPINION` secrets (see above).
 4. Push to `main` — the deploy workflow builds `_site/` and publishes it.
 
 No other GitHub configuration is required for the contact form itself.

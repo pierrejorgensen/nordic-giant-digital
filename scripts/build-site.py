@@ -19,6 +19,7 @@ HTML_SOURCES = [
     ROOT / "index.html",
     *(ROOT / "p").glob("*.html"),
     *(ROOT / "articles").glob("**/*.html"),
+    *(ROOT / "second-opinion").glob("**/*.html"),
 ]
 
 

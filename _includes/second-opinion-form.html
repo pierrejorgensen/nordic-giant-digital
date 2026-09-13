@@ -1,0 +1,18 @@
+  <form id="second-opinion-form{{suffix}}" class="contact-form" action="https://formspree.io/f/{% env FORMSPREE_FORM_ID_SECOND_OPINION your_second_opinion_form_id_here %}" method="POST">
+    <label for="name{{suffix}}">Name</label>
+    <input id="name{{suffix}}" name="name" type="text" required autocomplete="name">
+
+    <label for="email{{suffix}}">Email</label>
+    <input id="email{{suffix}}" name="email" type="email" required autocomplete="email">
+
+    <label for="url{{suffix}}">Link (URL)</label>
+    <input id="url{{suffix}}" name="url" type="url" required autocomplete="url" inputmode="url">
+
+    <label for="message{{suffix}}">How can we help you?</label>
+    <textarea id="message{{suffix}}" name="message" required></textarea>
+
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden aria-hidden="true">
+    <button type="submit">Let's figure it out</button>
+  </form>
+
+  <p id="form-status{{suffix}}" class="form-status" hidden role="status"></p>

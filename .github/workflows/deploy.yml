@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORMSPREE_FORM_ID: ${{ secrets.FORMSPREE_FORM_ID }}
+      FORMSPREE_FORM_ID_SECOND_OPINION: ${{ secrets.FORMSPREE_FORM_ID_SECOND_OPINION }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4

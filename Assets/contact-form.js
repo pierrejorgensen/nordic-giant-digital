@@ -6,11 +6,15 @@
     }
 
     var endpoint = form.getAttribute("action") || "";
-    if (!endpoint || endpoint.indexOf("your_form_id_here") !== -1) {
+    if (
+      !endpoint ||
+      endpoint.indexOf("your_form_id_here") !== -1 ||
+      endpoint.indexOf("your_second_opinion_form_id_here") !== -1
+    ) {
       status.hidden = false;
       status.className = "form-status error";
       status.textContent =
-        "Contact form is not configured yet. Set FORMSPREE_FORM_ID in .env and rebuild.";
+        "Contact form is not configured yet. Set the Formspree form ID in .env and rebuild.";
       form.querySelector("button[type=submit]").disabled = true;
       return;
     }
