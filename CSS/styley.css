@@ -800,6 +800,7 @@ th {
 /* Fields — hairline treatment */
 .contact-form input[type="text"]:not([hidden]),
 .contact-form input[type="email"],
+.contact-form input[type="url"],
 .contact-form textarea {
   display: block;
   width: 100%;
