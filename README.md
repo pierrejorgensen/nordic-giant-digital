@@ -29,7 +29,9 @@ For GitHub Pages deploys, add the same value as a repository secret named `FORMS
 
 The second-opinion landing page form uses a separate Formspree form. Set `FORMSPREE_FORM_ID_SECOND_OPINION` in `.env` locally and as a GitHub Actions secret for deploys. Include it on a page with `{% include second-opinion-form.html suffix= %}`.
 
-The form uses AJAX (see `Assets/contact-form.js`) so visitors stay on the page after submitting.
+The form uses AJAX (see `Assets/contact-form.js`) so visitors stay on the page after submitting. On success, the form is replaced with a short confirmation message that includes the submitter’s email address.
+
+Each form includes a hidden `_autoresponse` field with boilerplate copy for the submitter. In the [Formspree dashboard](https://formspree.io), enable the **Autoresponse** (confirmation email) plugin on both forms so that message is emailed to the address in the `email` field.
 
 ## GitHub Pages
 

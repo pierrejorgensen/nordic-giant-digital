@@ -222,6 +222,17 @@ header {
   margin-top: 1.5rem;
 }
 
+.contact-form--success h3 {
+  margin: 0 0 .75rem 0;
+  font-size: 1.5rem;
+  font-weight: 300;
+  letter-spacing: -.04em;
+}
+
+.contact-form--success p {
+  padding-bottom: 0;
+}
+
 .header-contact {
   display: flex;
   align-items: center;
