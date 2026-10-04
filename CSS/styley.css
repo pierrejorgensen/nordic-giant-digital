@@ -283,12 +283,16 @@ header img,
   --logo-motion-duration: 2500ms;
   --logo-ease: cubic-bezier(0.9, 1, 0.9, 1);
   flex-shrink: 0;
+}
+
+a.site-logo:link,
+a.site-logo:visited {
   color: var(--color-text-reversed);
   text-decoration: none;
 }
 
-.site-logo:hover {
-  color: var(--color-text-reversed);
+a.site-logo:hover {
+  color: #e5e0d8;
 }
 
 .site-logo svg {
