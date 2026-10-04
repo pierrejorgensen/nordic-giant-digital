@@ -284,6 +284,11 @@ header img,
   --logo-ease: cubic-bezier(0.9, 1, 0.9, 1);
   flex-shrink: 0;
   color: var(--color-text-reversed);
+  text-decoration: none;
+}
+
+.site-logo:hover {
+  color: var(--color-text-reversed);
 }
 
 .site-logo svg {
@@ -384,7 +389,10 @@ footer {
 }
 
 .footer-logo {
+  display: block;
   margin-bottom: 1.5rem;
+  text-decoration: none;
+  color: inherit;
 }
 
 .footer-logo svg {
