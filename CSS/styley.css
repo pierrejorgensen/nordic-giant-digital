@@ -810,7 +810,7 @@ th {
 .contact-form input[type="text"]:not([hidden]),
 .contact-form input[type="email"],
 .contact-form input[type="url"],
-.contact-form textarea {
+.contact-form textarea:not([hidden]) {
   display: block;
   width: 100%;
   max-width: 32rem;
@@ -827,9 +827,13 @@ th {
   transition: border-color 140ms, box-shadow 140ms;
 }
 
-.contact-form textarea {
+.contact-form textarea:not([hidden]) {
   min-height: 8rem;
   resize: vertical;
+}
+
+.contact-form textarea[hidden] {
+  display: none;
 }
 
 .contact-form input:not([hidden]):focus,
