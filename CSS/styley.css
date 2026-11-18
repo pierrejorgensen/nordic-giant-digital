@@ -252,10 +252,6 @@ header {
   cursor: pointer;
 }
 
-.header-contact__trigger:hover {
-  /* color: #e5e0d8; */
-}
-
 .band-slate a,
 .band-slate a:visited,
 .band-slate a:link,
@@ -286,10 +282,6 @@ header img,
 a.site-logo:link,
 a.site-logo:visited {
   text-decoration: none;
-}
-
-a.site-logo:hover {
-  /* color: #e5e0d8; */
 }
 
 .site-logo svg {
