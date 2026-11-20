@@ -1,0 +1,30 @@
+name: Shopify collection rotation
+
+on:
+  schedule:
+    # Top of every hour UTC — fair rotation, not newest-first
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: shopify-rotate-collections
+  cancel-in-progress: false
+
+jobs:
+  rotate:
+    runs-on: ubuntu-latest
+    env:
+      SHOPIFY_STORE: ${{ secrets.SHOPIFY_STORE }}
+      SHOPIFY_ADMIN_TOKEN: ${{ secrets.SHOPIFY_ADMIN_TOKEN }}
+      SHOPIFY_ROTATE_COLLECTION_IDS: ${{ secrets.SHOPIFY_ROTATE_COLLECTION_IDS }}
+      SHOPIFY_ROTATE_TITLE_CONTAINS: ${{ secrets.SHOPIFY_ROTATE_TITLE_CONTAINS }}
+      SHOPIFY_ROTATE_EXCLUDE_TITLES: ${{ secrets.SHOPIFY_ROTATE_EXCLUDE_TITLES }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Shuffle collection product order
+        run: python3 scripts/shopify-randomize-collections.py --hourly-rotation
